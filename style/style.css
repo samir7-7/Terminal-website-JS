@@ -1,0 +1,15 @@
+input {
+    background: none;
+    outline: none;
+    padding-left: 10px;
+    width: 95%;
+    margin-left: 10px;
+    caret-color: rgb(0, 153, 255);
+}
+
+.gif {
+    top: 1vh;
+    right: 10vw;
+    z-index: 10;
+    /* transform: rotate(-90deg); */
+}
