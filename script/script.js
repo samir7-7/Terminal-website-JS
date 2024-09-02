@@ -6,7 +6,7 @@ const khebe = document.querySelector(".gif")
 const red = document.querySelector(".red");
 
 
-const commands = ['bio', 'help', 'name', 'github', 'socials', 'clear', 'certificates','hireMe'];
+const commands = ['bio', 'help', 'name', 'github', 'socials', 'clear', 'certificates','hireMe','sendEmail'];
 
 
 // // this will filter the valid command and send them for further execution
@@ -68,6 +68,10 @@ const executeCommand = (command) => {
 
     else if(command === 'hireMe'){
         handleHire();
+    }
+
+    else if(command === 'sendEmail'){
+        handleEmail();
     }
 
     else {
@@ -140,6 +144,10 @@ const handleCertificates = ()=>{
 
 const handleHire = ()=>{
     screen.innerHTML += `<span>Fiverr: <a href="${info['hire']}" target="_blank" class="text-[#0BC2FF] underline">hire</a>`
+}
+
+const handleEmail = ()=>{
+    window.location.assign('https://mail.google.com/mail/u/1/#inbox?compose=CllgCJvqKBjnhhbNgHbszPPRXsLfmWdzJPCPltlzJBvFQXxKNDjpDfNTzMxvNrjJsFSbcBwNKfg')
 }
 
 // this function will add new input in the terminal

@@ -13,3 +13,11 @@ input {
     z-index: 10;
     /* transform: rotate(-90deg); */
 }
+
+.screen{
+    overflow-y: auto;
+}
+
+nav{
+    position: fixed;
+}

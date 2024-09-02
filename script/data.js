@@ -1,6 +1,6 @@
 const info = {
     help:[
-        'bio', 'name', 'github', 'socials', 'clear','certificates', 'hireMe'
+        'bio', 'name', 'github', 'socials', 'clear','certificates', 'hireMe','sendEmail'
     ],
     name: [
         "Samir Nepal"
