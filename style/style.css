@@ -1,9 +1,7 @@
 input {
     background: none;
     outline: none;
-    padding-left: 10px;
     width: 95%;
-    margin-left: 10px;
     caret-color: rgb(0, 153, 255);
 }
 
@@ -16,8 +14,6 @@ input {
 
 .screen{
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
-nav{
-    position: fixed;
-}
