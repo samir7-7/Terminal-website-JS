@@ -6,7 +6,7 @@ const khebe = document.querySelector(".gif")
 const red = document.querySelector(".red");
 
 
-const commands = ['bio', 'help', 'name', 'github', 'socials', 'clear', 'certificates','hireMe','sendEmail'];
+const commands = ['bio', 'help', 'name', 'github', 'socials', 'clear', 'certificates','hireme','sendemail'];
 
 
 // // this will filter the valid command and send them for further execution
