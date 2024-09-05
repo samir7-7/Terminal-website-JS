@@ -66,11 +66,11 @@ const executeCommand = (command) => {
         handleCertificates()
     }
 
-    else if(command === 'hireMe'){
+    else if(command === 'hireme'){
         handleHire();
     }
 
-    else if(command === 'sendEmail'){
+    else if(command === 'sendemail'){
         handleEmail();
     }
 
@@ -171,7 +171,7 @@ const addInput = () => {
 document.addEventListener('keydown', (e) => {
     const ninput = document.getElementById("command");
     if (e.key === 'Enter') {
-        checkCommand(ninput.value);
+        checkCommand((ninput.value).toLowerCase());
     }
 })
 
