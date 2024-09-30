@@ -6,7 +6,7 @@ const khebe = document.querySelector(".gif")
 const red = document.querySelector(".red");
 
 
-const commands = ['bio', 'help', 'name', 'github', 'socials', 'clear', 'certificates','hireMe','sendEmail'];
+const commands = ['bio', 'help', 'name', 'github', 'socials', 'clear', 'certificates','hireme','sendemail'];
 
 
 // // this will filter the valid command and send them for further execution
@@ -66,11 +66,11 @@ const executeCommand = (command) => {
         handleCertificates()
     }
 
-    else if(command === 'hireMe'){
+    else if(command === 'hireme'){
         handleHire();
     }
 
-    else if(command === 'sendEmail'){
+    else if(command === 'sendemail'){
         handleEmail();
     }
 
@@ -147,7 +147,7 @@ const handleHire = ()=>{
 }
 
 const handleEmail = ()=>{
-    window.location.assign('https://mail.google.com/mail/u/1/#inbox?compose=CllgCJvqKBjnhhbNgHbszPPRXsLfmWdzJPCPltlzJBvFQXxKNDjpDfNTzMxvNrjJsFSbcBwNKfg')
+    window.location.assign('https://mail.google.com/mail/u/1/#inbox?compose=CllgCJvqKBjnhhbNgHbszPPRXsLfmWdzJPCPltlzJBvFQXxKNDjpDfNTzMxvNrjJsFSbcBwNKfgz')
 }
 
 // this function will add new input in the terminal
@@ -171,7 +171,7 @@ const addInput = () => {
 document.addEventListener('keydown', (e) => {
     const ninput = document.getElementById("command");
     if (e.key === 'Enter') {
-        checkCommand(ninput.value);
+        checkCommand((ninput.value).toLowerCase());
     }
 })
 
