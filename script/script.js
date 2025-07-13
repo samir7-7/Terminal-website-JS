@@ -79,7 +79,7 @@ const checkCommand = (command) => {
 
     screen.innerHTML += `${
       ninput.value
-    } is not recognized as a command please try "help". Did you mean <span class="italic">"${nearestWord(
+    } is not recognized as a valid command. Did you mean <span class="italic">"${nearestWord(
       ninput.value.toLowerCase(),
       commands
     )}"</span><br>`;
