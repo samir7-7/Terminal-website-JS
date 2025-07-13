@@ -79,10 +79,10 @@ const checkCommand = (command) => {
 
     screen.innerHTML += `${
       ninput.value
-    } is not recognized as a valid command. Did you mean <span class="italic">"${nearestWord(
+    } is not recognized as a command please try "help". Did you mean "${nearestWord(
       ninput.value.toLowerCase(),
       commands
-    )}"</span><br>`;
+    )}"<br>`;
     addInput();
     khebe.classList.add("hidden");
   }
@@ -222,3 +222,7 @@ document.addEventListener("click", () => {
 //         }
 //     }
 // })
+
+document.getElementById("toggle-button").addEventListener("click", () => {
+  document.body.classList.toggle("invert");
+});
