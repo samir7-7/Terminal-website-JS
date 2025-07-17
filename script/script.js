@@ -17,28 +17,22 @@ const commands = [
   "certificates",
   "hireme",
   "sendemail",
-  // `sendmessage -n ${uname} -m ${message}`,
+  `sendmessage -n -m`,
 ];
 
 function levDistance(word1, word2) {
   const rows = word2.length + 1;
   const cols = word1.length + 1;
   const map = Array.from({ length: rows }, () => Array(cols).fill(0));
-
-  // Fill the first column: how many steps to build up word2 from empty
   for (let r = 0; r < rows; r++) map[r][0] = r;
 
-  // Fill the first row: how many steps to delete all of word1
   for (let c = 0; c < cols; c++) map[0][c] = c;
 
   for (let r = 1; r < rows; r++) {
     for (let c = 1; c < cols; c++) {
       if (word1[c - 1] === word2[r - 1]) {
-        // Characters match — just move diagonally, no changes needed
         map[r][c] = map[r - 1][c - 1];
       } else {
-        // Characters don't match — choose the best among:
-
         map[r][c] =
           1 +
           Math.min(
@@ -50,13 +44,41 @@ function levDistance(word1, word2) {
     }
   }
 
-  // Final answer is in the bottom-right cell
   return map[rows - 1][cols - 1];
 }
 
+function countMatchingIndices(str1, str2) {
+  const minLength = Math.min(str1.length, str2.length);
+  let count = 0;
+
+  for (let i = 0; i < minLength; i++) {
+    if (str1[i] === str2[i]) {
+      count++;
+    } else {
+      count--;
+    }
+  }
+
+  return count;
+}
+
 const nearestWord = (command, arr) => {
-  const distances = arr.map((el) => levDistance(command, el));
+  const distances = arr.map((el) => {
+    return (
+      1 /
+      (1 +
+        Math.exp(
+          -(levDistance(command, el) - countMatchingIndices(command, el) * 2)
+        ))
+    );
+  });
   return arr[distances.indexOf(Math.min(...distances))];
+};
+
+const checkIsMessage = (str) => {
+  const cmdArray = str.split(" ");
+  let newArray = cmdArray.slice(0, 2).concat(cmdArray.slice(3, 4));
+  return newArray.join(" ").toLowerCase() === "sendmessage -n -m";
 };
 
 // // this will filter the valid command and send them for further execution
@@ -68,8 +90,11 @@ const checkCommand = (command) => {
     screen.innerHTML += `Please enter a command<br>`;
     addInput();
     khebe.classList.add("hidden");
+  } else if (checkIsMessage(command)) {
+    handleMessage();
+    addInput();
   } else if (commands.includes(command)) {
-    console.log("Command Exists!");
+    // console.log("Command Exists!");
     screen.innerHTML += `<span class="text-yellow-500"><span>$ </span>${ninput.value}</span>`;
     khebe.classList.add("hidden");
     executeCommand(command);
@@ -108,8 +133,6 @@ const executeCommand = (command) => {
     handleHire();
   } else if (command === "sendemail") {
     handleEmail();
-  } else if (command === `sendmessage -n ${uname} -m ${message}`) {
-    handleMessage();
   } else {
     handleGetcv();
   }
@@ -185,7 +208,12 @@ const handleEmail = () => {
   );
 };
 
-async function handleMessage() {}
+async function handleMessage() {
+  const ninput = document.getElementById("command");
+  const command = ninput.value;
+  const nameAndMessage = command.split(" ");
+  console.log(nameAndMessage.slice(2, 3).concat(nameAndMessage.slice(4)));
+}
 
 // this function will add new input in the terminal
 const addInput = () => {
