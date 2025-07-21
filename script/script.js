@@ -223,6 +223,7 @@ async function handleMessage(command) {
     arr.slice(2, arr.indexOf("-m")).join(" "),
     arr.slice(arr.indexOf("-m") + 1).join(" "),
   ];
+  console.log(newAArr);
 
   fetch(
     "https://script.google.com/macros/s/AKfycbwCCZSv60C0inKOrUqBzWRFTAPWFS0uGyk2B2VVZPr_PbBm6BG7VrU6I2IQT8n2yKpHkw/exec",
