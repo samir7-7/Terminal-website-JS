@@ -77,7 +77,10 @@ const nearestWord = (command, arr) => {
 
 const checkIsMessage = (str) => {
   const cmdArray = str.split(" ");
-  let newArray = cmdArray.slice(0, 2).concat(cmdArray.slice(3, 4));
+
+  let newArray = cmdArray
+    .slice(0, 2)
+    .concat(cmdArray.slice(cmdArray.indexOf("-m"), cmdArray.indexOf("-m") + 1));
   return newArray.join(" ").toLowerCase() === "sendmessage -n -m";
 };
 
@@ -87,11 +90,13 @@ const checkCommand = (command) => {
   const ninput = document.getElementById("command");
   if (command.length < 1) {
     screen.innerHTML += `$ ${ninput.value}<br>`;
-    screen.innerHTML += `Please enter a command<br>`;
+    screen.innerHTML += `<span class="text-red-500">Please enter a command<span><br>`;
     addInput();
     khebe.classList.add("hidden");
   } else if (checkIsMessage(command)) {
-    handleMessage();
+    screen.innerHTML += `<span class="text-yellow-500"><span>$ </span>${ninput.value}</span>`;
+    khebe.classList.add("hidden");
+    handleMessage(command);
     addInput();
   } else if (commands.includes(command)) {
     // console.log("Command Exists!");
@@ -104,7 +109,7 @@ const checkCommand = (command) => {
 
     screen.innerHTML += `${
       ninput.value
-    } is not recognized as a command please try "help". Did you mean "${nearestWord(
+    } is not recognized as a command. Did you mean "${nearestWord(
       ninput.value.toLowerCase(),
       commands
     )}"<br>`;
@@ -208,11 +213,35 @@ const handleEmail = () => {
   );
 };
 
-async function handleMessage() {
-  const ninput = document.getElementById("command");
-  const command = ninput.value;
-  const nameAndMessage = command.split(" ");
-  console.log(nameAndMessage.slice(2, 3).concat(nameAndMessage.slice(4)));
+async function handleMessage(command) {
+  // const ninput = document.getElementById("command");
+  // const command = ninput.value;
+  // const nameAndMessage = command.split(" ");
+  // console.log(nameAndMessage.slice(2, 3).concat(nameAndMessage.slice(4)));
+  const arr = command.split(" ");
+  const newAArr = [
+    arr.slice(2, arr.indexOf("-m")).join(" "),
+    arr.slice(arr.indexOf("-m") + 1).join(" "),
+  ];
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbwCCZSv60C0inKOrUqBzWRFTAPWFS0uGyk2B2VVZPr_PbBm6BG7VrU6I2IQT8n2yKpHkw/exec",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: newAArr[0],
+        message: newAArr[1],
+      }),
+    }
+  )
+    .then((response) => response.text())
+    .then((result) => console.log("✅ Google Sheets says:", result))
+    .catch((error) => console.error("❌ Error sending to sheet:", error));
+
+  screen.innerHTML += `<span class="text-green-500">Message sent successfully!!</span>`;
 }
 
 // this function will add new input in the terminal
