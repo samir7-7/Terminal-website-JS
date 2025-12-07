@@ -159,7 +159,7 @@ const handleHelp = () => {
 
 // this will display my name
 const handleName = () => {
-  screen.innerHTML += `the ${info["name"]}<br>`;
+  screen.innerHTML += `${info["name"]}<br>`;
 };
 
 // this will show my details
