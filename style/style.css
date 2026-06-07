@@ -3,6 +3,8 @@ input {
     outline: none;
     width: 95%;
     caret-color: rgb(0, 153, 255);
+    color: white;
+    border: none;
 }
 
 .gif {
@@ -15,5 +17,29 @@ input {
 .screen{
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.active-tab {
+    background-color: #1f2937 !important; /* gray-800 */
+    color: white;
+}
+
+.tab {
+    background-color: #d1d5db; /* gray-300 */
+    color: #4b5563; /* gray-600 */
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    background-color: #9ca3af; /* gray-400 */
+}
+
+.tab.active-tab {
+    background-color: #1f2937;
+    color: white;
+}
+
+#tabs-container::-webkit-scrollbar {
+    height: 0px;
 }
 
